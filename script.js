@@ -16,8 +16,8 @@ document.addEventListener("click", (e) => {
 	const a = el.tagName.toLowerCase();
 
 	if (a == "a") {
-        e.preventDefault
-		carregaPagina(a);
+        e.preventDefault()
+		carregaPagina(el.getAttribute('href'));
 	}
 });
 
@@ -32,10 +32,12 @@ function carregaPagina(url) {
 			errorHandler(error);
 		},
 	};
+
+	request(obj);
 }
 
 function successHandler(response) {
-	let area = document.querySelector("div.area");
+	let area = document.querySelector(".area");
 	area.innerHTML = response;
 }
 
