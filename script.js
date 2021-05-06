@@ -8,17 +8,19 @@ document.addEventListener("click", (e) => {
 	}
 });
 
-function carregaPagina(url) {
-	fetch(url)
-		.then((response) => {
-			if (response.status >= 200 && response.status < 300) {
-				return response.text();
-			} else {
-				throw new Error(response.statusText);
-			}
-		})
-		.then((responseText) => successHandler(responseText))
-		.catch((e) => console.error(e));
+async function carregaPagina(url) {
+	try {
+		let response = await fetch(url+'a');
+
+		if (response.status >= 200 && response.status < 300) {
+			let html = await response.text();
+			successHandler(html);
+		}else {
+			throw new Error(response.statusText)
+		}
+	} catch (e) {
+		console.warn(e);
+	}
 }
 
 function successHandler(response) {
